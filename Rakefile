@@ -5,7 +5,8 @@ TARGET_DIR = "build"
 DEFAULT_EXCLUDE = ""
 EXCLUDE = ENV['EXCLUDE']? ENV['EXCLUDE'].split(','): false
 LAST_DIRECTORY = PACKAGE_DIR.split('/').last
-Rake::PackageTask.new(LAST_DIRECTORY.gsub(/(\W|\d)/, "_"), :noversion) do |p|
+DATE = Time.now.strftime("%d_%m_%Y_%H_%M_%S")
+Rake::PackageTask.new(LAST_DIRECTORY.gsub(/(\W|\d)/, "_"), "#{DATE}") do |p|
   p.package_dir = PACKAGE_DIR + "/" + TARGET_DIR
   p.need_tar_gz = true
   p.package_files.include("*")
